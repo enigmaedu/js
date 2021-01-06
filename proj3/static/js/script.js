@@ -8,11 +8,11 @@ function ageInDays(){
     h1.appendChild(textAnswer);
     document.getElementById('flex-box-result').appendChild(h1);
     // console.log(ageInDays);
-};
+}
 
 function reset(){
     document.getElementById('ageInDays').remove();
-};
+}
 
 // Challenge 2: Cat Generator
 function generateCat(){
@@ -20,16 +20,23 @@ function generateCat(){
     var div=document.getElementById('flex-cat-gen');
     image.src="https://thecatapi.com/api/images/get?format=src&type=gif&size=small";
     div.appendChild(image);
-};
+}
 
 // Challenge 3: Rock Paper Scissors
 function rpsGame(yourChoice){
  console.log(yourChoice.src);
 var humanChoice, botChoice;
 humanChoice=yourChoice.id;
+
 botChoice=numberToChoice(ranToRpsInt());
-results=decideWinner(humanChoice, botChoice); // [1,0] or [0.5,0.5] or [0,1] -->human lost bot-won
+console.log('Computer choice:' ,botChoice);
+
+results=decideWinner(humanChoice, botChoice); // Possible outcomes [1,0] -->human won-bot lost or [0.5,0.5] --> tie or [0,1] -->human lost bot-won
+console.log(results);
+
 message=finalMessage(results); // {message:'You Won', 'color':'green'}
+console.log(message);
+
 rpsFrontEnd(humanChoice, botChoice, message);
 }
 
@@ -46,7 +53,7 @@ function decideWinner(yourChoice,computerChoice) {
         'rock': {'scissors': 1, 'rock': 0.5, 'paper': 0},
         'paper': {'rock': 1, 'paper': 0.5, 'scissors': 0},
         'scissors':{'paper': 1, 'scissors': 0.5, 'rock': 0}
-    };
+    }
 
     var yourScore=rpsDatabase[yourChoice][computerChoice];
     var computerScore=rpsDatabase[computerChoice][yourChoice];
@@ -71,7 +78,7 @@ function rpsFrontEnd(humanImageChoice, botImageChoice, finalMessage) {
         'scissors':document.getElementById('scissors').src
     };
     
-    // lets remove all images
+    // remove all images
     document.getElementById('rock').remove();
     document.getElementById('paper').remove();
     document.getElementById('scissors').remove();
@@ -81,16 +88,17 @@ function rpsFrontEnd(humanImageChoice, botImageChoice, finalMessage) {
     var messageDiv=document.createElement('div');
 
     // console.log(humanDiv);
-    console.log(imagesDatabase[humanImageChoice]); 
+    // console.log(imagesDatabase[humanImageChoice]); 
 
+    // update div with the content to be displayed
     humanDiv.innerHTML= "<img src='" + imagesDatabase[humanImageChoice] + "'height=150 width=150 style='box-shadow: 0px 10px 50px rgba(37, 50,233,1);'>"
     messageDiv.innerHTML="<h1 style='color: " + finalMessage['color'] + "; font-size: 60px; padding: 30px; '>" + finalMessage['message'] + "</h1>"
     botDiv.innerHTML= "<img src='" + imagesDatabase[botImageChoice] + "'height=150 width=150 style='box-shadow: 0px 10px 50px rgba(243, 38,24,1);'>"
-
+    
+    // to display the results on the screen
     document.getElementById('flex-box-rps-div').appendChild(humanDiv);
-    document.getElementById('flex-box-rps-div').appendChild(botDiv);
     document.getElementById('flex-box-rps-div').appendChild(messageDiv);
-
+    document.getElementById('flex-box-rps-div').appendChild(botDiv);
 
 }
 
